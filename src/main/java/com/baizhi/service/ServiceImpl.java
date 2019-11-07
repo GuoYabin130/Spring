@@ -8,6 +8,7 @@ public class ServiceImpl implements Service {
     public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
         //我的你的同时
+        //我第二次提交了哦 小郭
     }
 
     @Override
