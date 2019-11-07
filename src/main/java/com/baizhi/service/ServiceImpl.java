@@ -12,6 +12,7 @@ public class ServiceImpl implements Service {
 
     @Override
     public void regise() {
+        //哈哈
         userDAO.save();
     }
 }
