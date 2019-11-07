@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--读取jdbc.properties小配置文件-->
+    <context:property-placeholder location="jdbc.properties"></context:property-placeholder>
+    <bean id="user" class="com.baizhi.entity.User">
+        <property name="id">
+            <value>1</value>
+        </property>
+        <property name="name" value="小黑"></property>
+        <property name="password" value="123456"></property>
+        <property name="age" value="18"></property>
+        <property name="names">
+            <array>
+                <value>张三</value>
+                <value>李四</value>
+                <value>王五</value>
+                <value>赵六</value>
+            </array>
+        </property>
+        <property name="ls">
+            <list>
+                <value>你</value>
+                <value>是</value>
+                <value>逼</value>
+                <value>傻</value>
+            </list>
+        </property>
+        <property name="ss">
+            <set>
+                <value>小</value>
+                <value>大</value>
+                <value>多</value>
+                <value>少</value>
+            </set>
+        </property>
+        <property name="mm">
+            <map>
+                <entry>
+                    <key>
+                        <value>1</value>
+                    </key>
+                    <value>小哈哈</value>
+                </entry>
+                <entry>
+                    <key>
+                        <value>2</value>
+                    </key>
+                    <value>小嘿嘿</value>
+                </entry>
+                <entry>
+                    <key>
+                        <value>3</value>
+                    </key>
+                    <value>小呵呵</value>
+
+                </entry>
+                <entry>
+                    <key>
+                        <value>4</value>
+                    </key>
+                    <value>小嘻嘻</value>
+
+                </entry>
+
+            </map>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="1">小黑</prop>
+                <prop key="2">小黄</prop>
+                <prop key="3">小红</prop>
+                <prop key="4">小白</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="userDAO" class="com.baizhi.dao.UserDAOImpl"></bean>
+    <bean id="Service" class="com.baizhi.service.ServiceImpl" autowire="byName"> <!--byName有问题-->
+        <!--<property name="UserDAO" ref="UserDAO"></property>-->
+    </bean>
+
+    <bean id="order" class="com.baizhi.entity.Order">
+        <!--属性名注入-->
+        <!--<constructor-arg name="id" value="1"></constructor-arg>-->
+        <!--<constructor-arg name="name" value="芒果"></constructor-arg>-->
+        <!--<constructor-arg name="price" value="18.8"></constructor-arg>-->
+        <!--下标注入-->
+        <!--<constructor-arg index="0" value="2"></constructor-arg>-->
+        <!--<constructor-arg index="1" value="香蕉"></constructor-arg>-->
+        <!--<constructor-arg index="2" value="2.22  "></constructor-arg>-->
+        <!--根据有参构造的类型-->
+        <constructor-arg type="java.lang.String" value="3"></constructor-arg>
+        <constructor-arg type="java.lang.String" value="辣椒"></constructor-arg>
+        <constructor-arg type="java.lang.Double" value="5.5"></constructor-arg>
+    </bean>
+    <bean id="connection" class="com.baizhi.factorybean.MyConnection">
+        <property name="driver" value="${driver}"></property>
+        <property name="url" value="${url}"></property>
+        <property name="username" value="${name}"></property>
+        <property name="password" value="${password}"></property>
+    </bean>
+    <bean id="sqlSessionFactory" class="com.baizhi.factorybean.MySqlSessionFactory"></bean>
+    <bean id="student" class="com.baizhi.entity.Student" init-method="init" destroy-method="destory"></bean>
+</beans>
